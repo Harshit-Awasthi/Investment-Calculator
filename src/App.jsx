@@ -1,6 +1,18 @@
+import React from 'react';
+import Header from './components/Header.jsx';
+import Data from './components/Data.jsx'
+import {calculateInvestmentResults,formatter} from './util/investment.js';
+
+
 function App() {
   return (
-    <h1>React Investment Calculator</h1>
+
+    <>
+    
+    <Header id="user-input" className="input-group"/>
+    <Data id='result'/>
+    
+    </>
   )
 }
 
