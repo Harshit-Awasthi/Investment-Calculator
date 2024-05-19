@@ -1,28 +1,32 @@
-import React from 'react';
+export default function Header({onChange,userInput}){
 
-export default function Header({id,className}){
+
     return (
+      
+            <section id="user-input">
 
-        <div id={id} >
+            <div className="input-group">
+                <p>
+                    <label>INITIAL INVESTMENT</label>
+                    <input  type="number" required value={userInput.initialInvestment} onChange={(event)=>onChange('initialInvestment',event.target.value)} />
+                </p>
+                <p>
+                    <label >ANNUAL INVESTMENT</label>
+                    <input  type="number" required value={userInput.annualInvestment} onChange={(event)=>onChange('annualInvestment',event.target.value) }/>
+                </p>
+            </div>
+            <div className="input-group">
+                <p>
+                    <label>EXPECTED RETURN</label>
+                    <input  type="number" required value={userInput.expectedReturn} onChange={(event)=>onChange('expectedReturn',event.target.value)} />
+                </p>
+                <p>
+                    <label >DURATION</label>
+                    <input   type="number" required value={userInput.duration} onChange={(event)=>onChange('duration',event.target.value)} />
+                </p>
+            </div>
 
-
-                    <label htmlFor="initial investment">INITIAL INVESTMENT</label>
-                    
-                    <input type="number" className={className}/>
-          
-                    <label htmlFor="annual investment">ANNUAL INVESTMENT</label>
-                    
-                    <input type="number" className={className}/>
-
-                    <label htmlFor="expected return">EXPECTED RETURN</label>
-                
-                    <input type="number" className={className}/>
-
-                    <label htmlFor="duration">DURATION</label>
-                    
-                    <input type="number" className={className}/>
-        </div>
-        
+            </section>
 
     )
 }

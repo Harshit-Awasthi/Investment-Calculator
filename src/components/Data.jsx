@@ -1,42 +1,42 @@
 import React from 'react';
 import {calculateInvestmentResults,formatter} from '../util/investment.js';
-// year, Investment Value, Interest(Year), Total interest, Invested capital
-export default function Data({id,value}){
 
+export default function Data({value}){
 
-
-    let content=calculateInvestmentResults(value);
-    console.log(typeof content);
-    if (!Array.isArray(content)) {
-        console.log('calculateInvestmentResults did not return an array:');
-        content = [];
-      }
+    const resultsData=calculateInvestmentResults(value);
+    const initialInvestment=resultsData[0].valueEndOfYear - resultsData[0].interest - resultsData[0].annualInvestment ;
 
     return (
 
         <div >
-            <table id={id}>
+            <table id="result">
                 <thead>
                     <tr>
                     <th>Year</th>
                     <th>Investment Value</th>
-                    <th>Interest(Year)</th>
-                    <th>Total interest</th>
-                    <th> Invested capital</th>
+                    <th>Interest (Year)</th>
+                    <th>Total Interest</th>
+                    <th>Invested Capital</th>
                     </tr>
                         
                 </thead>
                 <tbody>
-                {content.map((data,index)=>(<tr key={index}>
+                {resultsData.map(yearData=>
+                    {
+                        const totalInterest=yearData.valueEndOfYear - yearData.annualInvestment * yearData.year -initialInvestment;
+                        const totalAmountInvested=yearData.valueEndOfYear - totalInterest;
 
-              <td>{data.year}</td>
-              <td>{formatter.format(data.valueEndOfYear)}</td>
-              <td>{formatter.format(data.interest)}</td>
-              <td>{formatter.format(data.annualInvestment)}</td>
-              <td>{formatter.format(data.annualInvestment)}</td>
+                        return(
+                        <tr key={yearData.year}>
+
+              <td>{yearData.year}</td>
+              <td>{formatter.format(yearData.valueEndOfYear)}</td>
+              <td>{formatter.format(yearData.interest)}</td>
+              <td>{formatter.format(totalInterest)}</td>
+              <td>{formatter.format(totalAmountInvested)}</td>
                                 
 
-                </tr>))}
+                </tr>)})}
                 </tbody>
             </table>
         </div>
